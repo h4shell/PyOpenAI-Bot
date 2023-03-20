@@ -91,4 +91,5 @@ if __name__ == '__main__':
                     print(x)
                     send_to_telegram(ris['ID_FROM'], str(x))
         except:
+            print("Errore...")
             pass
