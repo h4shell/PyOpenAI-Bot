@@ -1,6 +1,7 @@
 from pyai import ai
 import requests
 from creds import *
+import time
 
 
 lock = True
@@ -75,6 +76,7 @@ if __name__ == '__main__':
 
     while True:
         try:
+            time.sleep(5)
             ris = inbox()
             if ris == None:
                 pass
@@ -88,8 +90,10 @@ if __name__ == '__main__':
                     pass
                 else:
                     x = ai(ris['TEXT'])
-                    print(x)
+                    print("_____________________________\n" + x)
                     send_to_telegram(ris['ID_FROM'], str(x))
-        except:
-            print("Errore...")
+        except Exception as e:
+
+            print(e)
+
             pass
