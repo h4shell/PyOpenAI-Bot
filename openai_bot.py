@@ -20,7 +20,10 @@ def send_to_telegram(to, message):
     }
 
     payload = {'chat_id': to,
-               'parse_mode': 'HTML', 'text': message, 'parse_mode': "HTML", "disable_web_page_preview": True}
+               'parse_mode': 'Markdown',
+               'text': message,
+               "disable_web_page_preview": True,
+               }
     apiURL = f'https://api.telegram.org/bot{conf["token_id"]}/sendMessage'
     response = requests.post(apiURL, json=payload, headers=headers).json()
 
@@ -71,18 +74,21 @@ def inbox():
 if __name__ == '__main__':
 
     while True:
-        ris = inbox()
-        if ris == None:
-            pass
-        else:
-            print(ris)
-        if ris == None:
-            pass
-        else:
-            if lock == True:
-                lock = False
+        try:
+            ris = inbox()
+            if ris == None:
                 pass
             else:
-                x = ai(ris['TEXT'])
-                print(x)
-                send_to_telegram(ris['ID_FROM'], str(x))
+                print(ris)
+            if ris == None:
+                pass
+            else:
+                if lock == True:
+                    lock = False
+                    pass
+                else:
+                    x = ai(ris['TEXT'])
+                    print(x)
+                    send_to_telegram(ris['ID_FROM'], str(x))
+        except:
+            pass
