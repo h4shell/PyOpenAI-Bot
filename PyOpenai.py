@@ -14,8 +14,15 @@ async def all(update, context):
     testo = update.message.text
     x = ai(testo)
 
+    cont = 0
+    x = ""
+    while cont < 3000:
+        x = x + "dfd"
+        cont = cont + 1
+    print(len(x))
     parti = len(x)/4000
     parti = int(str(parti)[0])
+    print(parti)
     if parti <= 1:
 
         await update.message.reply_text(x, parse_mode="Markdown")
@@ -26,7 +33,7 @@ async def all(update, context):
         await update.message.reply_text(testo[0], parse_mode="Markdown")
         await update.message.reply_text(testo[1], parse_mode="Markdown")
         pass
-    elif parti > 2 and parti <= 3:
+    elif parti >= 2 and parti <= 3:
 
         testo = {0: x[:4000], 1: x[4000:8000], 2: x[8000:12000]}
         await update.message.reply_text(testo[0], parse_mode="Markdown")
